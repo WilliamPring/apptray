@@ -12,6 +12,7 @@ func TestParseFile(t *testing.T) {
 		Name:    "Sample App", // not "Application Exemple", not "New Window"
 		Exec:    "sample --flag %U",
 		Comment: "Just a sample",
+		Type:    "Application",
 	}
 	if got != want {
 		t.Errorf("got %+v, want %+v", got, want)

@@ -40,8 +40,8 @@ func Scan(dirs []string) ([]Entry, error) {
 			}
 
 			e, err := ParseFile(filepath.Join(dir, file.Name()))
-			if err != nil || e.Name == "" {
-				continue // one broken or nameless file shouldn't stop the whole scan
+			if err != nil || e.Name == "" || !e.ShouldShow() {
+				continue // broken, nameless or not meant for menus: skip it
 			}
 			entries = append(entries, e)
 		}
