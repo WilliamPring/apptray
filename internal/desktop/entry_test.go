@@ -1,6 +1,9 @@
 package desktop
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func TestParseFile(t *testing.T) {
 	got, err := ParseFile("testdata/sample.desktop")
@@ -13,8 +16,12 @@ func TestParseFile(t *testing.T) {
 		Exec:    "sample --flag %U",
 		Comment: "Just a sample",
 		Type:    "Application",
+
+		Categories: []string{"Utility", "Network"},
 	}
-	if got != want {
+	// `got != want` no longer compiles: Entry now holds a slice, and slices
+	// can't be compared with ==. reflect.DeepEqual compares contents instead.
+	if !reflect.DeepEqual(got, want) {
 		t.Errorf("got %+v, want %+v", got, want)
 	}
 }

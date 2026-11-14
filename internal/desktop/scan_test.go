@@ -4,7 +4,8 @@ import "testing"
 
 func TestScan(t *testing.T) {
 	// "testdata/nope" doesn't exist: Scan must skip it, not fail.
-	// testdata/hidden.desktop has NoDisplay=true, so it must be filtered out.
+	// testdata/hidden.desktop has NoDisplay=true, and testdata/settings.desktop
+	// is in the Settings category: both must be filtered out.
 	got, err := Scan([]string{"testdata", "testdata/nope"})
 	if err != nil {
 		t.Fatalf("Scan returned error: %v", err)

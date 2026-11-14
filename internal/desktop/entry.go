@@ -3,6 +3,7 @@ package desktop
 import (
 	"bufio"
 	"os"
+	"slices"
 	"strings"
 )
 
@@ -14,11 +15,18 @@ type Entry struct {
 	Type      string // "Application", "Link" or "Directory"
 	NoDisplay bool   // true = app exists but must not appear in menus
 	Hidden    bool   // true = entry was "deleted" by the user/distro
+
+	// Categories comes from "Categories=Network;WebBrowser;" in the file.
+	Categories []string
 }
 
 // ShouldShow reports whether this entry belongs in a launcher.
 func (e Entry) ShouldShow() bool {
-	return e.Type == "Application" && !e.NoDisplay && !e.Hidden
+	if e.Type != "Application" || e.NoDisplay || e.Hidden {
+		return false
+	}
+	// Settings panels (Xfce Appearance, Display, Accessibility...) are not "apps".
+	return !slices.Contains(e.Categories, "Settings")
 }
 
 // ParseFile reads one .desktop file and returns its [Desktop Entry] fields.
@@ -71,6 +79,13 @@ func ParseFile(path string) (Entry, error) {
 			e.NoDisplay = strings.TrimSpace(value) == "true"
 		case "Hidden":
 			e.Hidden = strings.TrimSpace(value) == "true"
+		case "Categories":
+			// "A;B;" splits into ["A" "B" ""], so drop the empty piece.
+			for _, c := range strings.Split(value, ";") {
+				if c = strings.TrimSpace(c); c != "" {
+					e.Categories = append(e.Categories, c)
+				}
+			}
 		}
 	}
 

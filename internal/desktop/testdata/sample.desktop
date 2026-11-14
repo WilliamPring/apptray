@@ -5,6 +5,7 @@ Type=Application
 Name=Sample App
 Name[fr]=Application Exemple
 Comment=Just a sample
+Categories=Utility;Network;
 Exec=sample --flag %U
 Icon=sample
 
