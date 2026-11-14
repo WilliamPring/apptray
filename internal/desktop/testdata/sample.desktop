@@ -1,0 +1,13 @@
+# A comment line: must be ignored
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Sample App
+Name[fr]=Application Exemple
+Comment=Just a sample
+Exec=sample --flag %U
+Icon=sample
+
+[Desktop Action new-window]
+Name=New Window
+Exec=sample --new-window

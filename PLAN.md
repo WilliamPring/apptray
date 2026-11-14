@@ -26,9 +26,22 @@ The part we care about is the `[Desktop Entry]` section: `Name=`, `Exec=`, `Comm
 | 1 | Parse ONE `.desktop` file into a struct | structs, `os.Open`, `bufio.Scanner`, `strings`, errors, `defer` |
 | 2 | Scan the application directories | `os.ReadDir`, `filepath.Join`, slices, `sort`, `os.UserHomeDir` |
 | 3 | Filter entries by a query | functions, `strings.Contains`/`ToLower`, tests (`go test`, table-driven) |
-| 4 | CLI POC: `go run . firefox` prints matches | `os.Args`, `flag`, splitting code into packages |
-| 5 | Show it in a window (text box + result list) | a GUI toolkit (plan: Fyne), callbacks, goroutines basics |
-| 6 | Polish: arrow keys, Esc to quit, fuzzy match, launch on Enter | `os/exec`, key events, better matching |
+| 4 | Parse `Categories=` and **group** entries by category | slices, `strings.Split`, `map[string][]Entry`, `reflect.DeepEqual` / `slices.Equal` |
+| 5 | CLI POC: `go run . firefox` prints matches under group headings | `os.Args`, `flag`, splitting code into packages |
+| 6 | Show it in a window, rofi-style (input on top, grouped list below) | a GUI toolkit (plan: Fyne), callbacks, goroutines basics |
+| 7 | Polish: arrow keys, Esc to quit, fuzzy match, launch on Enter | `os/exec`, key events, better matching |
+
+### Grouping design (step 4+)
+- Group by the **first** entry in `Categories=` mapped to a friendly name
+  (e.g. `WebBrowser`/`Network` -> "Internet", `Development` -> "Development").
+  Unknown or missing -> "Other".
+- Display: results sorted by group, with a non-selectable group header row, so it reads like
+  a grouped rofi list. Typing still filters across all groups.
+- Later idea: rofi-style "modes" (apps / run / windows) switched with Tab.
+
+### "Like rofi" target look
+Centered, borderless popup; text input on top; list below; Enter launches; Esc closes;
+opened by an i3 keybinding.
 
 Steps 1–4 are plain Go with **no GUI**, so you can build and test the logic
 (even on the Mac) before touching windowing on Arch.
