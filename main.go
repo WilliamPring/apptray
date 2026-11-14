@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"log"
 
 	"apptray/internal/desktop"
+	"apptray/internal/ui"
 )
 
 func main() {
@@ -13,7 +13,5 @@ func main() {
 		log.Fatal(err)
 	}
 
-	for _, e := range entries {
-		fmt.Println(e.Name)
-	}
+	ui.Run(entries)
 }
