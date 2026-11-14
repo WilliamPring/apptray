@@ -1,0 +1,114 @@
+About Xfce
+Access Prompt
+Accessibility
+Advanced Network Configuration
+Appearance
+Application Finder
+Bitwarden
+Brave
+Brave Origin (nightly)
+Brave Origin (nightly)
+Bulk Rename
+Carla
+Carla (JACK multi-client)
+Carla (JACK single client)
+Carla Control
+Carla-Patchbay
+Carla-Rack
+Cartes
+Cemu
+Claude Code URL Handler
+Code - OSS
+Code - OSS - URL Handler
+Code - OSS - URL Handler
+Color Profiles
+Create Launcher on the panel
+Default Applications
+Desktop
+Display
+Easy Effects
+Eden
+Electron 36
+Electron 37
+Feh
+File Manager
+Firefox
+Game 460807638964371468
+Google Maps
+Hardware Locality lstopo
+Htop
+i3
+Keyboard
+kitty
+kitty URL Launcher
+LACT
+LibreOffice
+LibreOffice Base
+LibreOffice Calc
+LibreOffice Draw
+LibreOffice Impress
+LibreOffice Math
+LibreOffice Writer
+LibreOffice XSLT based filters
+LM Studio
+Log Out
+LSP Plugins
+Mail Reader
+Monero GUI
+Mouse and Touchpad
+mpv Media Player
+Mullvad VPN
+NetworkManager Applet
+Notifications
+OpenStreetMap
+Panel
+Pinentry
+PolicyKit Authentication Agent
+Portal
+Power Manager
+ProtonUp-Qt
+PulseAudio System Tray
+qBittorrent
+QEMU
+qpwgraph
+Qt Assistant
+Qt D-Bus Viewer
+Qt Linguist
+Qt V4L2 test Utility
+Qt V4L2 video capture utility
+Qt Widgets Designer
+Qtractor
+ranger
+Removable Drives and Media
+Rofi
+Rofi Theme Selector
+Run Program...
+Ryujinx
+Screenshot
+Session and Startup
+Settings Editor
+Settings Manager
+Steam
+Terminal Emulator
+Thunar File Manager
+Thunar Preferences
+UXTerm
+Vesktop
+View file
+Vim
+Virtual Machine Manager
+VLC media player
+VLC media player (Audio CD)
+VLC media player (Blu-ray)
+VLC media player (DVD)
+VLC media player (VCD)
+Web Browser
+wheelmap.org
+Window Manager
+Window Manager Tweaks
+Workspaces
+Xfce Terminal
+Xfce Terminal Settings
+XTerm
+Yazi File Manager
+Zenity
