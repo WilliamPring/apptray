@@ -3,12 +3,14 @@ package desktop
 import (
 	"bufio"
 	"os"
+	"path/filepath"
 	"slices"
 	"strings"
 )
 
 // Entry is the small part of a .desktop file we care about.
 type Entry struct {
+	ID 		  string
 	Name      string
 	Exec      string
 	Comment   string
@@ -37,7 +39,7 @@ func ParseFile(path string) (Entry, error) {
 	}
 	defer f.Close() // runs when ParseFile returns, however it returns
 
-	var e Entry
+	e := Entry{ID: strings.TrimSuffix(filepath.Base(path), ".desktop")}
 	inEntry := false // are we currently inside the [Desktop Entry] section?
 
 	scanner := bufio.NewScanner(f)
