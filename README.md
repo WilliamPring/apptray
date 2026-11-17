@@ -65,5 +65,22 @@ Change `$mod+d` if that key is already bound (for example to rofi or dmenu).
 main.go                 wiring only
 internal/desktop/       parse and scan .desktop files
 internal/search/        filter entries by query
+internal/config/        ~/.config/apptray/apptray.conf
+internal/launcher/      the rows each mode shows (no GUI imports)
 internal/ui/            Fyne window
+```
+
+## Modes
+
+The window has three tabs — Search, Categories and Power — switched with `Tab`
+or, when the search box is empty, `←`/`→`. `-mode` picks the one it opens on:
+
+```bash
+apptray -mode power
+```
+
+which makes a second i3 binding worthwhile:
+
+```
+bindsym $mod+shift+e exec --no-startup-id /path/to/apptray -mode power
 ```
