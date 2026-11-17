@@ -10,7 +10,7 @@ import (
 
 // Entry is the small part of a .desktop file we care about.
 type Entry struct {
-	ID 		  string
+	ID        string
 	Name      string
 	Exec      string
 	Comment   string
