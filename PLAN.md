@@ -172,11 +172,17 @@ func Load(path string) (Config, error)
 // GroupsFor returns every group e belongs to, in display order.
 // Resolution order:
 //   1. user groups from [groups] that list e.ID   (can be several)
-//   2. otherwise the friendly name of e.Categories[0]
+//   2. otherwise the friendly name of the FIRST category we recognise
 //   3. otherwise "Other"
 // Never returns an empty slice.
 func (c Config) GroupsFor(e desktop.Entry) []string
 ```
+
+> Tier 2 originally said "the friendly name of `Categories[0]`". That is wrong for
+> real files: VS Code ships `Categories=TextEditor;Development;IDE;`, and `TextEditor`
+> is not one of the spec's main categories, so index 0 alone would file it under
+> "Other". Walking the list and taking the first category we know fixes that and
+> behaves identically for well-formed files like Firefox's `Network;WebBrowser;`.
 
 The friendly-name map (`WebBrowser`/`Network` → "Internet", `Development` →
 "Development", …) is the one already sketched under "Grouping design" above. Keep it

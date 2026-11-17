@@ -1,0 +1,8 @@
+# Same filename as ../sample.desktop, so the same ID: "sample".
+# Stands in for ~/.local/share/applications shadowing /usr/share/applications.
+[Desktop Entry]
+Type=Application
+Name=Sample App (user copy)
+Comment=The user's override
+Categories=Utility;
+Exec=sample --user

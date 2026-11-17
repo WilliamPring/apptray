@@ -12,6 +12,7 @@ func TestParseFile(t *testing.T) {
 	}
 
 	want := Entry{
+		ID:      "sample",     // from the filename, not from anything inside the file
 		Name:    "Sample App", // not "Application Exemple", not "New Window"
 		Exec:    "sample --flag %U",
 		Comment: "Just a sample",

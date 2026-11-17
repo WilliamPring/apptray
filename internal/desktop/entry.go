@@ -3,12 +3,18 @@ package desktop
 import (
 	"bufio"
 	"os"
+	"path/filepath"
 	"slices"
 	"strings"
 )
 
 // Entry is the small part of a .desktop file we care about.
 type Entry struct {
+	// ID is the desktop file ID: the filename without ".desktop".
+	// Unlike Name it is not translated and does not change between versions,
+	// so it is what the config file uses to tag an app.
+	ID string
+
 	Name      string
 	Exec      string
 	Comment   string
@@ -37,7 +43,8 @@ func ParseFile(path string) (Entry, error) {
 	}
 	defer f.Close() // runs when ParseFile returns, however it returns
 
-	var e Entry
+	// The ID comes from the filename, not the contents, so it is known up front.
+	e := Entry{ID: strings.TrimSuffix(filepath.Base(path), ".desktop")}
 	inEntry := false // are we currently inside the [Desktop Entry] section?
 
 	scanner := bufio.NewScanner(f)
