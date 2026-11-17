@@ -1,3 +1,8 @@
+// Package launcher turns the installed apps and the user's config into rows,
+// whatever mode the window is in. It imports no GUI toolkit on purpose: the
+// whole model is testable without a display.
+package launcher
+
 import (
 	"log"
 	"slices"
