@@ -10,6 +10,27 @@ import (
 	"apptray/internal/search"
 )
 
+// searchEntry is a text entry that gives Esc back to the launcher instead of
+// swallowing it like widget.Entry does.
+type searchEntry struct {
+	widget.Entry
+	onEscape func()
+}
+
+func newSearchEntry(onEscape func()) *searchEntry {
+	e := &searchEntry{onEscape: onEscape}
+	e.ExtendBaseWidget(e)
+	return e
+}
+
+func (e *searchEntry) TypedKey(key *fyne.KeyEvent) {
+	if key.Name == fyne.KeyEscape {
+		e.onEscape()
+		return
+	}
+	e.Entry.TypedKey(key)
+}
+
 // Run opens the launcher window and blocks until it is closed.
 func Run(entries []desktop.Entry) {
 	a := app.New()
@@ -19,7 +40,7 @@ func Run(entries []desktop.Entry) {
 	// so when we reassign it and call Refresh(), the list redraws with the new data.
 	matches := entries
 
-	input := widget.NewEntry()
+	input := newSearchEntry(w.Close)
 	input.SetPlaceHolder("Search apps...")
 
 	list := widget.NewList(
@@ -40,6 +61,13 @@ func Run(entries []desktop.Entry) {
 	w.Resize(fyne.NewSize(600, 400))
 	w.CenterOnScreen()
 	w.Canvas().Focus(input) // start typing immediately
+
+	// Esc also works when focus has moved off the entry (e.g. onto the list).
+	w.Canvas().SetOnTypedKey(func(key *fyne.KeyEvent) {
+		if key.Name == fyne.KeyEscape {
+			w.Close()
+		}
+	})
 
 	w.ShowAndRun()
 }

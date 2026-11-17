@@ -1,7 +1,10 @@
 # apptray
 
 A small rofi-style application launcher written in Go, for Arch Linux (X11 / i3).
-Type to filter your installed apps. See [PLAN.md](PLAN.md) for the learning roadmap.
+Type to filter your installed apps.
+
+- [PLAN.md](PLAN.md) — the learning roadmap, and **what** each step builds (signatures, behaviour)
+- [GUIDE.md](GUIDE.md) — **which file to edit, in what order, and why**, for the step in progress
 
 ## Dependencies
 
