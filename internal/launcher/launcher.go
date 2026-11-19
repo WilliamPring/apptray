@@ -136,12 +136,17 @@ func stub(title, command string) Item {
 	}
 }
 
-// appItem renders one app as a row. Launching is still step 7's job, so Run
-// stays nil and the UI treats the row as inert.
+// appItem renders one app as a row.
+//
+// e.Launch is a *method value*: it captures this entry's copy of the receiver
+// and becomes a plain func() error, which is exactly the shape Item.Run wants.
+// No closure over the loop variable, and no need for Item to know what a
+// desktop entry is.
 func appItem(e desktop.Entry, c config.Config) Item {
 	return Item{
 		Title:    e.Name,
 		Subtitle: strings.Join(c.GroupsFor(e), ", "),
+		Run:      e.Launch,
 	}
 }
 
@@ -167,9 +172,9 @@ func sortedKeys(m map[string]int) []string {
 	return keys
 }
 
-// matches is the same case-insensitive contains that search.Filter applies to
-// app names, for the places where we filter plain strings instead of entries.
+// matches applies the same fuzzy rule search.Filter uses on app names to the
+// places where we filter plain strings: group names and power actions. One
+// rule everywhere, so typing behaves the same whichever tab you are on.
 func matches(s, query string) bool {
-	q := strings.ToLower(strings.TrimSpace(query))
-	return q == "" || strings.Contains(strings.ToLower(s), q)
+	return search.Match(s, query)
 }

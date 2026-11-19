@@ -131,8 +131,12 @@ func Run(entries []desktop.Entry, cfg config.Config, startTab launcher.Tab) {
 			refresh()
 		case item.Run != nil:
 			if err := item.Run(); err != nil {
+				// Stay open and keep the error on stderr: the user can pick
+				// something else instead of the window vanishing silently.
 				log.Printf("apptray: %v", err)
+				return
 			}
+			w.Close() // the launcher's job is done; get out of the way
 		}
 	}
 
